@@ -23,6 +23,8 @@
        <p align="right">
            <a href="{{ route('TiendaRopa.create') }}" class="btn btn-success">Crear producto</a>
            <a href="{{ route('home') }}" class="btn btn-primary">Regresar</a>
+           <a href="{{ route('imprimir.productos') }}" class="btn btn-primary">Generar PDF de Productos</a>
+
        </p>
        <table id="example" class="table table-striped table-bordered" style="width:100%">
            <thead>

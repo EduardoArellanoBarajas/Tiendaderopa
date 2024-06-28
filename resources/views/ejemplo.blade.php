@@ -1,35 +1,42 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-   <meta charset="UTF-8">
-   <title>Document</title>
-   <style>
-       h1{
-           text-align: center;
-           text-transform: uppercase;
-       }
-       .contenido{
-           font-size: 20px;
-       }
-       #primero{
-           background-color: #ccc;
-       }
-       #segundo{
-           color:#44a359;
-       }
-       #tercero{
-           text-decoration:line-through;
-       }
-   </style>
+    <title>Productos</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
-<h1>Título de prueba</h1>
-<hr>
-<H3>{{$today}}</H3>
-<div class="contenido">
-   <p id="primero">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore nihil illo odit aperiam alias rem voluptatem odio maiores doloribus facere recusandae suscipit animi quod voluptatibus, laudantium obcaecati quisquam minus modi.</p>
-   <p id="segundo">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore nihil illo odit aperiam alias rem voluptatem odio maiores doloribus facere recusandae suscipit animi quod voluptatibus, laudantium obcaecati quisquam minus modi.</p>
-   <p id="tercero">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore nihil illo odit aperiam alias rem voluptatem odio maiores doloribus facere recusandae suscipit animi quod voluptatibus, laudantium obcaecati quisquam minus modi.</p>
-</div>
+    <h1>Lista de Productos</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Categoría</th>
+                <th>Stock</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($productos as $producto)
+            <tr>
+                <td>{{ $producto->name }}</td>
+                <td>{{ $producto->description }}</td>
+                <td>{{ $producto->price }}</td>
+                <td>{{ $producto->category ? $producto->category->name : '' }}</td>
+                <td>{{ $producto->stock }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 </body>
 </html>

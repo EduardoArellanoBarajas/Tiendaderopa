@@ -18,14 +18,12 @@
 
 
    <div class="row">
-       <h2>Lista de productos</h2>
+       <h2>Categoria </h2>
        <hr>
        <br>
        <p align="right">
-           <a href="<?php echo e(route('TiendaRopa.create')); ?>" class="btn btn-success">Crear producto</a>
+           <a href="<?php echo e(route('categories.create')); ?>" class="btn btn-success">Crear</a>
            <a href="<?php echo e(route('home')); ?>" class="btn btn-primary">Regresar</a>
-           <a href="<?php echo e(route('imprimir.productos')); ?>" class="btn btn-primary">Generar PDF de Productos</a>
-
        </p>
        <table id="example" class="table table-striped table-bordered" style="width:100%">
            <thead>
@@ -33,11 +31,7 @@
                    <th>Acciones</th>
                    <th>Id</th>
                    <th>Nombre</th>
-                   <th>Descripción</th>
-                   <th>Precio</th>
-                   <th>Categoría</th>
-                   <th>Stock</th>
-                   <th>Imágenes</th>
+                
                </tr>
            </thead>
            <tbody>
@@ -77,7 +71,7 @@
 <script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.print.min.js"></script>
 <script type="text/javascript">
-    var data = <?php echo json_encode($product, 15, 512) ?>;
+    var data = <?php echo json_encode($categories, 15, 512) ?>;
 
     $(document).ready(function() {
         $('#example').DataTable({
@@ -124,7 +118,7 @@
     function modal(parametro) {
         console.log(parametro);
         $('#nombre').html(parametro);
-        let url = "<?php echo e(route('deleteProducto', ':id')); ?>";
+        let url = "<?php echo e(route('deleteCategoria', ':id')); ?>";
         url = url.replace(':id', parametro);
         document.getElementById('borrar').href = url;
     }
@@ -181,4 +175,4 @@
 
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('adminlte::page', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp2\htdocs\Tiendad de ropa\Tiendaropa\resources\views/TiendaRopa/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('adminlte::page', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp2\htdocs\Tiendad de ropa\Tiendaropa\resources\views/categories/index.blade.php ENDPATH**/ ?>

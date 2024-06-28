@@ -1,36 +1,43 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-   <meta charset="UTF-8">
-   <title>Document</title>
-   <style>
-       h1{
-           text-align: center;
-           text-transform: uppercase;
-       }
-       .contenido{
-           font-size: 20px;
-       }
-       #primero{
-           background-color: #ccc;
-       }
-       #segundo{
-           color:#44a359;
-       }
-       #tercero{
-           text-decoration:line-through;
-       }
-   </style>
+    <title>Productos</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
-<h1>Título de prueba</h1>
-<hr>
-<H3><?php echo e($today); ?></H3>
-<div class="contenido">
-   <p id="primero">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore nihil illo odit aperiam alias rem voluptatem odio maiores doloribus facere recusandae suscipit animi quod voluptatibus, laudantium obcaecati quisquam minus modi.</p>
-   <p id="segundo">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore nihil illo odit aperiam alias rem voluptatem odio maiores doloribus facere recusandae suscipit animi quod voluptatibus, laudantium obcaecati quisquam minus modi.</p>
-   <p id="tercero">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore nihil illo odit aperiam alias rem voluptatem odio maiores doloribus facere recusandae suscipit animi quod voluptatibus, laudantium obcaecati quisquam minus modi.</p>
-</div>
+    <h1>Lista de Productos</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Categoría</th>
+                <th>Stock</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $__currentLoopData = $productos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $producto): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <tr>
+                <td><?php echo e($producto->name); ?></td>
+                <td><?php echo e($producto->description); ?></td>
+                <td><?php echo e($producto->price); ?></td>
+                <td><?php echo e($producto->category ? $producto->category->name : ''); ?></td>
+                <td><?php echo e($producto->stock); ?></td>
+            </tr>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        </tbody>
+    </table>
 </body>
 </html>
 <?php /**PATH C:\xampp2\htdocs\Tiendad de ropa\Tiendaropa\resources\views/ejemplo.blade.php ENDPATH**/ ?>

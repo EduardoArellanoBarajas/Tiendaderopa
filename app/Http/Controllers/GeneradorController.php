@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\PDF as PDF;
+use App\Models\Producto;
+
 
 class GeneradorController extends Controller
 {
@@ -15,5 +17,12 @@ class GeneradorController extends Controller
        $pdf =\PDF::loadView('ejemplo',compact('today'));
        return $pdf->download('ejemplo.pdf');
 
+    }
+
+    public function imprimirProductos()
+    {
+        $productos = Producto::where('stock', '>', 0)->get();
+        $pdf = \PDF::loadView('ejemplo', compact('productos'));
+        return $pdf->download('productos.pdf');
     }
 }

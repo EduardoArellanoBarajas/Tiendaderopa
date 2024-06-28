@@ -1,31 +1,28 @@
+@extends('adminlte::page')
+@section('content')
+@section('css')
 
-<?php $__env->startSection('content'); ?>
-<?php $__env->startSection('css'); ?>
-
-   <link rel="stylesheet" href="<?php echo e(asset('build/assets/app.css')); ?>">
+   <link rel="stylesheet" href="{{ asset('build/assets/app.css') }}">
    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-   <script src="<?php echo e(asset('build/assets/app.js')); ?>"></script>
-<?php $__env->stopSection(); ?>
+   <script src="{{ asset('build/assets/app.js') }}"></script>
+@endsection
 <div class="container">
    <div class="row">
-       <?php if(session('message')): ?>
+       @if (session('message'))
            <div class="alert alert-success">
-               <?php echo e(session('message')); ?>
-
+               {{ session('message') }}
            </div>
-       <?php endif; ?>
+       @endif
    </div>
 
 
    <div class="row">
-       <h2>Lista de productos</h2>
+       <h2>Categoria </h2>
        <hr>
        <br>
        <p align="right">
-           <a href="<?php echo e(route('TiendaRopa.create')); ?>" class="btn btn-success">Crear producto</a>
-           <a href="<?php echo e(route('home')); ?>" class="btn btn-primary">Regresar</a>
-           <a href="<?php echo e(route('imprimir.productos')); ?>" class="btn btn-primary">Generar PDF de Productos</a>
-
+           <a href="{{ route('categories.create') }}" class="btn btn-success">Crear</a>
+           <a href="{{ route('home') }}" class="btn btn-primary">Regresar</a>
        </p>
        <table id="example" class="table table-striped table-bordered" style="width:100%">
            <thead>
@@ -33,11 +30,7 @@
                    <th>Acciones</th>
                    <th>Id</th>
                    <th>Nombre</th>
-                   <th>Descripción</th>
-                   <th>Precio</th>
-                   <th>Categoría</th>
-                   <th>Stock</th>
-                   <th>Imágenes</th>
+                
                </tr>
            </thead>
            <tbody>
@@ -68,7 +61,7 @@
     </div>
 </div>
 
-<?php $__env->startSection('js'); ?>
+@section('js')
 <script src="https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.flash.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
@@ -77,7 +70,7 @@
 <script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.print.min.js"></script>
 <script type="text/javascript">
-    var data = <?php echo json_encode($product, 15, 512) ?>;
+    var data = @json($categories);
 
     $(document).ready(function() {
         $('#example').DataTable({
@@ -124,7 +117,7 @@
     function modal(parametro) {
         console.log(parametro);
         $('#nombre').html(parametro);
-        let url = "<?php echo e(route('deleteProducto', ':id')); ?>";
+        let url = "{{ route('deleteCategoria', ':id') }}";
         url = url.replace(':id', parametro);
         document.getElementById('borrar').href = url;
     }
@@ -177,8 +170,6 @@
         }
     });
 </script>
-<?php $__env->stopSection(); ?>
+@endsection
 
-<?php $__env->stopSection(); ?>
-
-<?php echo $__env->make('adminlte::page', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp2\htdocs\Tiendad de ropa\Tiendaropa\resources\views/TiendaRopa/index.blade.php ENDPATH**/ ?>
+@endsection

@@ -1,17 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Storage;
 use App\Models\Producto;
+use Barryvdh\DomPDF\PDF;
 use App\Models\categorie;
 use Illuminate\Support\Arr;
 use FontLib\Table\Type\name;
 use Illuminate\Http\Request;
-use JeroenNoten\LaravelAdminLte\View\Components\Form\Input;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use JeroenNoten\LaravelAdminLte\View\Components\Form\Input;
+
 
 
 class ProductsControlle extends Controller
+
 {
     /**
      * Display a listing of the resource.
@@ -19,12 +22,35 @@ class ProductsControlle extends Controller
     public function index()
     {
         //mostrar todos los registrsos de la tabla
-        $vs_product = Producto::where('stock', '>', 0)->get();
-        
-        $product = $this->cargarDT($vs_product);
+        $product = Producto::where('stock', '>', 0)->get();  
+        $product = $this->cargarDT($product);
         return view('TiendaRopa.index')->with('product', $product);
 
+
     }
+
+    public function welcome()
+{
+    // Obtener todos los productos con stock mayor que cero
+    $products = Producto::where('stock', '>', 0)->get();
+
+    // Cargar la ruta completa de la imagen para cada producto
+    foreach ($products as $product) {
+        $imageArray = json_decode($product->images);
+        if (is_array($imageArray)) {
+            $product->imagen = asset('storage/' . $imageArray[0]); // Asignar solo la primera imagen por ahora
+        } else {
+            $product->imagen = ''; // Manejar caso sin imágenes
+        }
+    }
+
+    // Agrupar los productos por categoría
+    $groupedProducts = $products->groupBy('category_id');
+
+    return view('welcome', compact('groupedProducts'));
+}
+
+    
 
     public function cargarDT($consulta)
     {
@@ -237,5 +263,12 @@ class ProductsControlle extends Controller
      
      
      }
+
+     
+
+
+
+    
+
      
 }
